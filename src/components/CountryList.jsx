@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CountryCard from './CountryCard';
+import ShimmerEffect from './ShimmerEffect';
 
 function CountryList({theam}) {
   const [country, setCountry] = useState([]);
@@ -8,12 +9,16 @@ function CountryList({theam}) {
     const fetchData = async () => {
       const resp = await fetch('https://restcountries.com/v3.1/all');
       const data = await resp.json();
-      console.log(data);
+
       setCountry(data);  // Set country data to state
     };
 
     fetchData();
   }, []);
+
+  if (country.length === 0) {
+    return <ShimmerEffect/>
+  }
 
 
   return (

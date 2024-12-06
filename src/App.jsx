@@ -7,7 +7,13 @@ import Header from './components/Header'
 
 function App() {
 
-  const [theam,setTheam] = useState(true)
+  const [theam,setTheam] = useState(JSON.parse(localStorage.getItem('theam')))
+
+  if(localStorage.getItem('theam')==null)
+  {
+     localStorage.setItem('theam',true)
+  }
+  
 
   return (
     <div className='h-auto w-full flex flex-col flex-wrap gap-3 justify-center'>
