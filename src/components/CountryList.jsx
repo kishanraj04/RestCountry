@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import CountryCard from './CountryCard';
 import ShimmerEffect from './ShimmerEffect';
 
-function CountryList({theam}) {
+function CountryList({theam,query}) {
   const [country, setCountry] = useState([]);
-  console.log(theam);
   useEffect(() => {
     const fetchData = async () => {
       const resp = await fetch('https://restcountries.com/v3.1/all');
@@ -25,7 +24,9 @@ function CountryList({theam}) {
     <>
       <div className={`flex w-full h-auto flex-wrap gap-3 justify-center ${theam === false ? 'bg-black' : 'bg-white'}`}>
 
-      {country.map((item, index) => {
+      {country.filter((item)=>{
+         return item.name.common.toLowerCase().includes(query)
+      }).map((item, index) => {
         return <CountryCard key={index} name={item.name.common} image={item.flags.svg} population={item.population} area={item.area} theam={theam}/>;
       })}
       </div>
